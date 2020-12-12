@@ -28,7 +28,6 @@ struct Token {
 };
 
 typedef struct Node Node;
-// 
 struct Node {
 	NodeKind kind;
 	Node *lhs;
@@ -37,10 +36,11 @@ struct Node {
 };
 
 char *user_input;
+
 // Current Token
 Token *token;
 
-//error func.
+//error function
 void error(char *fmt, ...) {
 	va_list ap;
 	va_start(ap, fmt);
@@ -48,6 +48,7 @@ void error(char *fmt, ...) {
 	fprintf(stderr, "\n");
 	exit(1);
 }
+
 void error_at(char *loc, char *fmt, ...) {
 	va_list ap;
 	va_start(ap,fmt);
@@ -112,6 +113,7 @@ Node *new_node_num(int val) {
 	node->val = val;
 	return node;
 }
+
 Node *expr();
 Node *mul();
 Node *primary();
@@ -146,6 +148,7 @@ Node *expr() {
 		else return node;
 	}
 }
+
 // tokenize p and return the result
 Token *tokenize() {
 	char *p = user_input;
@@ -173,7 +176,6 @@ Token *tokenize() {
 	new_token(TK_EOF, cur, p);
 	return head.next;
 }
-
 
 void gen(Node *node) {
 	if(node->kind == ND_NUM) {
